@@ -113,6 +113,21 @@ function Result<TItem extends StoredDocSearchHit>({
         <div className="DocSearch-Hit-Container">
           {renderIcon({ item, index })}
 
+          {item.hierarchy[item.type] && item.type === 'lvl0' && (
+            <div className="DocSearch-Hit-content-wrapper">
+              <Snippet
+                className="DocSearch-Hit-title"
+                hit={item}
+                attribute="hierarchy.lvl0"
+              />
+              <Snippet
+                className="DocSearch-Hit-path"
+                hit={item}
+                attribute="url"
+              />
+            </div>
+          )}
+
           {item.hierarchy[item.type] && item.type === 'lvl1' && (
             <div className="DocSearch-Hit-content-wrapper">
               <Snippet
@@ -120,13 +135,11 @@ function Result<TItem extends StoredDocSearchHit>({
                 hit={item}
                 attribute="hierarchy.lvl1"
               />
-              {item.content && (
-                <Snippet
-                  className="DocSearch-Hit-path"
-                  hit={item}
-                  attribute="content"
-                />
-              )}
+              <Snippet
+                className="DocSearch-Hit-path"
+                hit={item}
+                attribute={item.content ? 'content' : 'url'}
+              />
             </div>
           )}
 

@@ -205,6 +205,7 @@ export function DocSearchModal({
                     'url',
                   ],
                   attributesToSnippet: [
+                    `hierarchy.lvl0:${snippetLength.current}`,
                     `hierarchy.lvl1:${snippetLength.current}`,
                     `hierarchy.lvl2:${snippetLength.current}`,
                     `hierarchy.lvl3:${snippetLength.current}`,

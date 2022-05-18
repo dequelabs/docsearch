@@ -24,12 +24,20 @@ export function Snippet<TItem extends StoredDocSearchHit>({
   tagName = 'span',
   ...rest
 }: SnippetProps<TItem>) {
+  let property: string =
+    getPropertyByPath(hit, `_snippetResult.${attribute}.value`) ||
+    getPropertyByPath(hit, attribute);
+
+  if (attribute === 'url') {
+    property = property
+      .substring(property.lastIndexOf('/'))
+      .replace(/#.*$/, '');
+  }
+
   return createElement(tagName, {
     ...rest,
     dangerouslySetInnerHTML: {
-      __html:
-        getPropertyByPath(hit, `_snippetResult.${attribute}.value`) ||
-        getPropertyByPath(hit, attribute),
+      __html: property,
     },
   });
 }
